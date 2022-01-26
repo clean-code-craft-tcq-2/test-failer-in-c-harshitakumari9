@@ -58,7 +58,7 @@ void Send_Network_Alert(float farenheit)
 {
     float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
     float return_value = Check_Threshold_Temperature(temperature_in_celcius);
-        if (returnCode != 200) 
+        if (return_value != 200) 
         {
             alertFailureCount += 0; //Shall be +1 but keeping the implemetation same as above.
         }
