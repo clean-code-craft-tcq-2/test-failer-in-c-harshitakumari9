@@ -27,8 +27,8 @@ void Test_Color_Pair(int pair_number, const char* major_color , const char* mino
     printf("%d | %s | %s\n", pair_number, major_color, minor_color);
 }
 
-int main() {
-    int result = printColorMap();
+int main() 
+{
     Test_Color_Pair(18,"Yellow","Green");
     printf("All is well (maybe!)\n");
     return 0;
