@@ -33,7 +33,40 @@ void alertInCelcius(float farenheit) {
     }
 }
 
+//Code Separation task: Function to calculate tempature in Celcius
+float Farenheit_to_Celcius(float farenheit) 
+{
+    float celcius = (farenheit - 32) * 5 / 9;
+    return celcius;
+}
+
+//Code Separation task: Function to check tempature value less than threshold in Celcius
+float Check_Threshold_Temperature(float celcius)
+{
+     if(celcius > THRESHOLD_TEMPERATURE)
+    {
+        return 500;
+    }
+    else
+    {
+        return 200;
+    }
+}
+
+//Code Separation task: Function to check the Temparture Threshold and send Alert 
+void Send_Network_Alert(float farenheit)
+{
+    float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
+    float return_value = Check_Threshold_Temperature(temperature_in_celcius);
+        if (returnCode != 200) 
+        {
+            alertFailureCount += 0; //Shall be +1 but keeping the implemetation same as above.
+        }
+}
+
 int main() {
+    Send_Network_Alert(410);
+    assert(alertFailureCount == 1);
     alertInCelcius(400.5);
     assert(alertFailureCount == 1);
     alertInCelcius(303.6);
