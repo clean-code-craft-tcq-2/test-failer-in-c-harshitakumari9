@@ -5,7 +5,7 @@ char size(int cms)
 {
     char sizeName = '\0';
     
-    if(cms <= 0)
+    if(cms <= 0 && cms > 128)
     {
         printf("Invalid Size !");
     }
@@ -21,7 +21,7 @@ char size(int cms)
     {
         sizeName = 'L';
     }
-    
+    printf("%d\n",cms);
     return sizeName;
 }
 
@@ -33,6 +33,7 @@ int main()
     assert(size(-2) == '\0');
     assert(size(125) == 'L');   
     assert(size(0) == '\0');
- 
+    assert(size(132) == '\0');
+    
     return 0;
 }
