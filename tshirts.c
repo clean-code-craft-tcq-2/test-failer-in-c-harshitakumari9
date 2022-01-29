@@ -31,7 +31,7 @@ int main()
     assert(size(38) == 'S');
     assert(size(42) == 'M');
     assert(size(-2) == '\0');
-    assert(size(125) == '\0');   
+    assert(size(125) == 'L');   
     assert(size(0) == '\0');
  
     return 0;
