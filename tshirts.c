@@ -4,8 +4,9 @@
 char size(int cms) 
 {
     char sizeName = '\0';
+    printf("%d",cms);
     
-    if(cms <= 0 && cms > 128)
+    if(cms <= 0 || cms > 128)
     {
         printf("Invalid Size !");
     }
@@ -21,7 +22,6 @@ char size(int cms)
     {
         sizeName = 'L';
     }
-    printf("%d\n",cms);
     return sizeName;
 }
 
