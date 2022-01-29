@@ -1,15 +1,27 @@
 #include <stdio.h>
 #include <assert.h>
 
-char size(int cms) {
+char size(int cms) 
+{
     char sizeName = '\0';
-    if(cms < 38) {
+    
+    if(cms <= 0)
+    {
+        printf("Invalid Size !");
+    }
+    else if(cms <= 38) 
+    {
         sizeName = 'S';
-    } else if(cms > 38 && cms < 42) {
+    } 
+    else if(cms > 38 && cms <= 42)
+    {
         sizeName = 'M';
-    } else if(cms > 42) {
+    } 
+    else if(cms > 42 && cms <= 127) 
+    {
         sizeName = 'L';
     }
+    
     return sizeName;
 }
 
@@ -20,6 +32,7 @@ int main()
     assert(size(42) == 'M');
     assert(size(-2) == '\0');
     assert(size(0) == '\0');
+    assert(size(128) == '\0');
     
     printf("All is well (maybe!)\n");
     return 0;
