@@ -31,9 +31,8 @@ int main()
     assert(size(38) == 'S');
     assert(size(42) == 'M');
     assert(size(-2) == '\0');
+    assert(size(125) == '\0');   
     assert(size(0) == '\0');
-    assert(size(128) == '\0');
-    
-    printf("All is well (maybe!)\n");
+ 
     return 0;
 }
