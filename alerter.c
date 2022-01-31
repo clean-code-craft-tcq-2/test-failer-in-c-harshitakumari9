@@ -37,9 +37,9 @@ float Farenheit_to_Celcius(float farenheit)
     return celcius;
 }
 
-void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float), int (*fnPtrFornetworkAlertStub)(float)) {
+void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float)) {
     float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
-    fnPtrFornetworkAlertStub; //loosely coupled with stub function
+    fnPtrFornetworkAlertStub(temperature_in_celcius); //loosely coupled with stub function
     int return_code = fnPtrForNetworkAlert(temperature_in_celcius); //from actual network alert function
     if (return_code != 200) {
         alertFailureCount ++;
@@ -49,10 +49,9 @@ void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float), int (*f
 int main() 
 {
     int (*fnPtrForNetworkAlert)(float) = networkAlert;
-    int (*fnPtrFornetworkAlertStub)(float) = networkAlertStub;
     
-    alertInCelcius(400.5, fnPtrForNetworkAlert, fnPtrFornetworkAlertStub);
-    alertInCelcius(303.6, fnPtrForNetworkAlert, fnPtrFornetworkAlertStub);
+    alertInCelcius(400.5, fnPtrForNetworkAlert);
+    alertInCelcius(303.6, fnPtrForNetworkAlert);
     assert(alertFailureCount == 2);
     printf("%d alerts failed.\n", alertFailureCount);
     return 0;
