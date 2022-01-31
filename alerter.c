@@ -39,7 +39,8 @@ float Farenheit_to_Celcius(float farenheit)
 
 void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float), int (*fnPtrFornetworkAlertStub)(float)) {
     float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
-    int return_code = fnPtrForNetworkAlert(temperature_in_celcius);
+    fnPtrFornetworkAlertStub; //loosely coupled with stub function
+    int return_code = fnPtrForNetworkAlert(temperature_in_celcius); //from actual network alert function
     if (return_code != 200) {
         alertFailureCount ++;
     }
