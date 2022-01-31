@@ -39,15 +39,17 @@ float Farenheit_to_Celcius(float farenheit)
 
 void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float), int (*fnPtrFornetworkAlertStub)(float)) {
     float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
-    int returnCode = fnPtrForNetworkAlert(celcius);
-    if (returnCode != 200) {
+    int temperature_in_celcius = fnPtrForNetworkAlert(celcius);
+    if (temperature_in_celcius != 200) {
         alertFailureCount ++;
     }
 }
 
 int main() 
 {
-    int (*fnPtrForNetworkAlert)(float) = networkAlertStub;
+    int (*fnPtrForNetworkAlert)(float) = networkAlert;
+    int (*fnPtrFornetworkAlertStub)(float) = networkAlertStub;
+    
     alertInCelcius(400.5, fnPtrForNetworkAlert, fnPtrFornetworkAlertStub);
     alertInCelcius(303.6, fnPtrForNetworkAlert, fnPtrFornetworkAlertStub);
     assert(alertFailureCount == 2);
