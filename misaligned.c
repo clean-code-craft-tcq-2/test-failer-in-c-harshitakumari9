@@ -34,6 +34,7 @@ void Test_Color_Pair(int pair_number, const char* major_color , const char* mino
 int main() 
 {
     Test_Color_Pair(18,"Yellow","Green");
-    printf("All is well (maybe!)\n");
+    Test_Color_Pair(9,"Red","Brown");
+    Test_Color_Pair(23,"Violet","Green");
     return 0;
 }
