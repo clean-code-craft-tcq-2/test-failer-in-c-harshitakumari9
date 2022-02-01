@@ -4,11 +4,11 @@
 char size(int cms) 
 {
     char sizeName = '\0';
-  
+    printf("Size Entered is %d\n",cms);
     //Assuming the Minimum Size is greeater than 0 and Maximum size is 100.
     if(cms <= 0 || cms > 100)
     {
-        printf("Invalid Size !");
+        printf("Invalid Size !\n",cms);
     }
     else if(cms <= 38) 
     {
