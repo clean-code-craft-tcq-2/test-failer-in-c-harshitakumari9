@@ -8,7 +8,7 @@ char size(int cms)
     //Assuming the Minimum Size is greeater than 0 and Maximum size is 100.
     if(cms <= 0 || cms > 100)
     {
-        printf("Invalid Size !\n",cms);
+        printf("Invalid Size !\n");
     }
     else if(cms <= 38) 
     {
