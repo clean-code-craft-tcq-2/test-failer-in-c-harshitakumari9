@@ -52,7 +52,8 @@ int main()
     
     alertInCelcius(400.5, fnPtrForNetworkAlert);
     alertInCelcius(303.6, fnPtrForNetworkAlert);
-    assert(alertFailureCount == 1);
+    alertInCelcius(500.4, fnPtrForNetworkAlert);
+    assert(alertFailureCount == 2);
     printf("%d alerts failed.\n", alertFailureCount);
     return 0;
 }
