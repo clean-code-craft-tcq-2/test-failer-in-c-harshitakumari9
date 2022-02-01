@@ -3,30 +3,57 @@
 
 int alertFailureCount = 0;
 
-int networkAlertStub(float celcius) {
-    printf("ALERT: Temperature is %.1f celcius.\n", celcius);
+int networkAlertStub(float celcius) 
+{
     // Return 200 for ok
     // Return 500 for not-ok
-    // stub always succeeds and returns 200
-    return 200;
-}
-
-void alertInCelcius(float farenheit) {
-    float celcius = (farenheit - 32) * 5 / 9;
-    int returnCode = networkAlertStub(celcius);
-    if (returnCode != 200) {
-        // non-ok response is not an error! Issues happen in life!
-        // let us keep a count of failures to report
-        // However, this code doesn't count failures!
-        // Add a test below to catch this bug. Alter the stub above, if needed.
-        alertFailureCount += 0;
+    if(celcius > 200)
+    {
+        printf("ALERT: Temperature is %.1f celcius.\n", celcius);
+        return 500;
+    }
+    else
+    {
+        return 200;
     }
 }
 
-int main() {
-    alertInCelcius(400.5);
-    alertInCelcius(303.6);
+//Code Separation task: Actual network function 
+int networkAlert(float celcius) {
+    if(celcius > 200){
+        printf("ALERT: Temperature is %.1f celcius.\n", celcius);
+        return 500;
+    }
+    else 
+    {
+    return 200;
+    }
+} 
+
+//Function to calculate tempature in Celcius
+float Farenheit_to_Celcius(float farenheit) 
+{
+    float celcius = (farenheit - 32) * 5 / 9;
+    return celcius;
+}
+
+void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float)) {
+    
+    float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
+    int return_code = fnPtrForNetworkAlert(temperature_in_celcius); //from actual network alert function
+    if (return_code != 200) {
+        alertFailureCount ++;
+    }
+}
+
+int main() 
+{
+    int (*fnPtrForNetworkAlert)(float) = networkAlertStub;
+    
+    alertInCelcius(400.5, fnPtrForNetworkAlert);
+    alertInCelcius(303.6, fnPtrForNetworkAlert);
+    alertInCelcius(500.4, fnPtrForNetworkAlert);
+    assert(alertFailureCount == 2);
     printf("%d alerts failed.\n", alertFailureCount);
-    printf("All is well (maybe!)\n");
     return 0;
 }
