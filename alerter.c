@@ -20,7 +20,7 @@ int networkAlertStub(float celcius) {
 
 //Code Separation task: Actual network function 
 int networkAlert(float celcius) {
-    if( celcius > 200){
+    if(celcius > 200){
         printf("ALERT: Temperature is %.1f celcius.\n", celcius);
         return 500;
     }
@@ -38,7 +38,7 @@ float Farenheit_to_Celcius(float farenheit)
 }
 
 void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float)) {
-    int (*fnPtrForNetworkAlert)(float) = networkAlert;
+    
     float temperature_in_celcius = Farenheit_to_Celcius(farenheit);
     int return_code = fnPtrForNetworkAlert(temperature_in_celcius); //from actual network alert function
     if (return_code != 200) {
@@ -48,11 +48,11 @@ void alertInCelcius(float farenheit, int (*fnPtrForNetworkAlert)(float)) {
 
 int main() 
 {
-    
+    int (*fnPtrForNetworkAlert)(float) = networkAlertStub;
     
     alertInCelcius(400.5, fnPtrForNetworkAlert);
     alertInCelcius(303.6, fnPtrForNetworkAlert);
-    assert(alertFailureCount == 2);
+    assert(alertFailureCount == 1);
     printf("%d alerts failed.\n", alertFailureCount);
     return 0;
 }
